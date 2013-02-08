@@ -1,11 +1,11 @@
 DemoApp::Application.routes.draw do
+  get "users/new"
+
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
 
-  resources :microposts
-
-  resources :users
+  match '/signup', :to => 'users#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
