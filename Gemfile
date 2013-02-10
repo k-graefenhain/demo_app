@@ -5,6 +5,8 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'gravatar_image_tag'
+
 group :production do
   gem 'pg'
 end
@@ -34,6 +36,7 @@ end
 group :test do
   gem 'rspec'
   gem 'webrat', '0.7.1'
+  gem 'factory_girl_rails'
 end
 
 # To use ActiveModel has_secure_password
