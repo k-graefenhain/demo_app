@@ -7,3 +7,10 @@ FactoryGirl.define do
     user.password_confirmation "foobar"
   end
 end
+
+# syntax changed, see https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
+FactoryGirl.define do
+  sequence :email do |n|
+    "person-#{n}@example.com"
+  end
+end
