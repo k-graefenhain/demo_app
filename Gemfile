@@ -6,6 +6,7 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'gravatar_image_tag'
+gem 'will_paginate'
 
 group :production do
   gem 'pg'
@@ -31,6 +32,7 @@ gem 'jquery-rails'
 group :development do
   gem 'rspec-rails'
   gem 'annotate'
+  gem 'faker'
 end
 
 group :test do
