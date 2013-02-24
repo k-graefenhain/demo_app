@@ -2,6 +2,7 @@ DemoApp::Application.routes.draw do
   get "sessions/new"
 
   resources :users
+  resources :microposts, :only => [:create, :destroy]
   
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
