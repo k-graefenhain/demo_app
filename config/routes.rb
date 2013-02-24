@@ -1,7 +1,11 @@
 DemoApp::Application.routes.draw do
   get "sessions/new"
 
-  resources :users
+  # exercise 7, chapter 11.5
+  resources :users do
+    resources :microposts
+  end
+
   resources :microposts, :only => [:create, :destroy]
   
   match '/contact', :to => 'pages#contact'
