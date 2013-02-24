@@ -16,7 +16,7 @@ DemoApp::Application.configure do
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   # NOTE KG: don't set compile to true due to performance reasons. Instead run 
-  # 'RAILS_ENV=production bundle exec rake assets:precompile' before pushing to heroku, 
+  # 'RAILS_ENV=production bundle exec rake assets:precompile' before pushing to heroku.
   # see http://stackoverflow.com/questions/7300532/blueprint-css-rails-3-1-help
   config.assets.compile = false
 

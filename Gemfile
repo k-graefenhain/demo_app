@@ -32,7 +32,7 @@ gem 'jquery-rails'
 group :development do
   gem 'rspec-rails'
   gem 'annotate'
-  gem 'faker'
+  gem 'faker', :require => false  # see http://stackoverflow.com/questions/5013826/heroku-rake-dbmigrate-no-such-file-to-load-faker
 end
 
 group :test do
