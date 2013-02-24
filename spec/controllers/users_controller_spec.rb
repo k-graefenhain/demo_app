@@ -33,6 +33,18 @@ describe UsersController do
       get :new
       response.should have_selector("input[name='user[password_confirmation]'][type='password']")
     end
+
+    # exercise 3, chapter 10.6
+    describe "for signed-in users" do
+      before(:each) do
+        @user = test_sign_in(FactoryGirl.create(:user))
+      end
+
+      it "should redirect to the root_path" do
+        get :new
+        response.should redirect_to(root_path)
+      end
+    end
   end
 
 
@@ -277,6 +289,27 @@ describe UsersController do
         response.should have_selector("a", :href => "/users?page=2", :content => "Next")
       end
     end
+
+
+    # exercise 4, chapter 10.6
+    describe "as a non-admin user" do
+      it "should not have a delete link" do
+        @user = test_sign_in(FactoryGirl.create(:user))
+        get :index
+        response.should_not have_selector("a", :content => "delete")
+      end
+    end
+
+    describe " as an admin user" do
+      it "should have a delete link" do
+        admin = FactoryGirl.create(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(admin)
+        get :index
+        response.should have_selector("a", :content => "delete")
+      end
+    end 
+    # end exercise
+
   end
 
 
@@ -302,8 +335,8 @@ describe UsersController do
 
     describe "as an admin user" do
       before(:each) do
-        admin = FactoryGirl.create(:user, :email => "admin@example.com", :admin => true)
-        test_sign_in(admin)
+        @admin = FactoryGirl.create(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(@admin)
       end
 
       it "should destroy the user" do
@@ -315,6 +348,13 @@ describe UsersController do
       it "should redirect to the users page" do
         delete :destroy, :id => @user
         response.should redirect_to(users_path)
+      end
+
+      # exercise 5, chapter 10.6
+      it "should not destroy itself" do
+        lambda do
+          delete :destroy, :id => @admin
+        end.should_not change(User, :count)
       end
     end
   end
