@@ -18,6 +18,14 @@ class MicropostsController < ApplicationController
     redirect_back_or root_path
   end
 
+  # exercise 7, chapter 11.5
+  def index
+    @user = User.find(params[:user_id])
+
+    #@microposts = Micropost.find_by_user_id(params[:user_id])
+    @microposts = @user.microposts.paginate(:page => params[:page])
+  end
+
   private
     def authorized_user
       @micropost = Micropost.find(params[:id])
