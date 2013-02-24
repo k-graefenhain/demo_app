@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   end
 
   def new
+    # exercise 3, chapter 10.6
+    redirect_to(root_path) unless !signed_in?
+
     @user = User.new
     @title = 'Sign up'
   end
@@ -20,6 +23,9 @@ class UsersController < ApplicationController
   end
 
   def create
+    # exercise 3, chapter 10.6
+    redirect_to(root_path) unless !signed_in?
+
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
@@ -50,8 +56,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User destroyed."
+    user = User.find(params[:id])
+    # exercise 5, chapter 10.6
+    if current_user?(user)
+      flash[:error] = "Can't destroy yourself."
+    else
+      user.destroy 
+      flash[:success] = "User destroyed."
+    end
     redirect_to users_path
   end
 
