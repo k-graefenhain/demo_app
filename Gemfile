@@ -25,6 +25,10 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
+  gem 'therubyracer'
+  gem 'less-rails'
+  gem 'bootstrap-sass'
 end
 
 gem 'jquery-rails'
@@ -40,6 +44,8 @@ group :test do
   gem 'webrat', '0.7.1'
   gem 'factory_girl_rails'
 end
+
+gem 'simple_form'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

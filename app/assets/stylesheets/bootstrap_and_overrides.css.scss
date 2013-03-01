@@ -1,0 +1,88 @@
+// Set the correct sprite paths
+$iconSpritePath: asset-url('glyphicons-halflings.png', image);
+$iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
+
+// $navbarBackground: #555;
+// $navbarBackgroundHighlight: #888;
+// $navbarText: #eee;
+// $navbarLinkColor: #eee;
+
+@import "bootstrap";
+
+@import "bootstrap-responsive";
+
+body { padding-top: 20px; }
+
+header {
+  padding-top: 20px;
+}
+header img {
+  padding: 1em;
+  background: #fff;
+}
+
+section {
+  margin-top: 1em;
+  font-size: 120%;
+  padding: 20px;
+  background: #fff;
+}
+section h1 {
+  font-size: 200%;
+}
+
+/* Sign up button */
+a.signup_button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  width: 190px;
+  color: #fff;
+  background: #006400;
+  font-size: 150%;
+  font-weight: bold;
+  padding: 20px;
+}
+/* Round corners */
+.round {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 50px;
+  width: 710px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* contact page */
+.name {
+  display: none;
+}
+a.btn icon-envelope {
+  height: 34; 
+  width: 34;
+}
+
+table.microposts tbody tr {
+  height: 70px;
+}
+table.microposts tbody tr td.gravatar {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  width: 50px;
+}
+table.microposts tbody tr td.micropost {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  padding-top: 10px;
+}
+table.microposts tbody tr td.micropost span.timestamp {
+  display: block;
+  font-size: 85%;
+  color: #666;
+}

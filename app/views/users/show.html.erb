@@ -1,21 +1,28 @@
-<table class="profile" summary="Profile information">
-  <tr>
-    <td class="main">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </td>
-    <td class="sidebar round">
-      <strong>Name</strong> <%= @user.name %><br />
-      <strong>URL</strong> <%= link_to user_path(@user), @user %><br />
-      <strong>Microposts</strong> <%= @user.microposts.count %>
-    </td>
-    <% unless @user.microposts.empty? %>
-      <table class="microposts" summary="User microposts">
-        <%= render @microposts %>
-      </table>
-      <%= will_paginate @microposts %>
+<%- model_class = User -%>
+<!-- div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div -->
+
+<table>
+  <tbody>
+    <tr>
+      <td class="main">
+        <h1>
+          <%= gravatar_for @user %>
+          <%= @user.name %>
+        </h1>
+      </td>
+      <td class="sidebar round">
+        <strong>Name</strong> <%= @user.name %><br />
+        <strong>URL</strong> <%= link_to user_path(@user), @user %><br />
+        <strong>Microposts</strong> <%= @user.microposts.count %>
+      </td>
+      <% unless @user.microposts.empty? %>
+        <table class="microposts" summary="User microposts">
+          <%= render @microposts %>
+        </table>
+        <%= will_paginate @microposts %>
     <% end %>
-  </tr>
+    </tr>
+  </tbody>
 </table>
