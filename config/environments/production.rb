@@ -51,7 +51,7 @@ DemoApp::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
   # see http://stackoverflow.com/questions/7443536/blueprint-screen-css-isnt-precompiled
-  config.assets.precompile += %w( *.css *.js )
+  config.assets.precompile += %w( application.js application.css bootstrap_and_overrides.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
