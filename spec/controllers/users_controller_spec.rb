@@ -21,7 +21,7 @@ describe UsersController do
 
     it "should have an email field" do
       get :new
-      response.should have_selector("input[name='user[email]'][type='text']")
+      response.should have_selector("input[name='user[email]'][type='email']")
     end
 
     it "should have a password field" do
@@ -161,7 +161,7 @@ describe UsersController do
     it "should have a link to change the Gravatar" do
       get :edit, :id => @user
       gravatar_url = "http://gravatar.com/emails"
-      response.should have_selector("a", :href => gravatar_url, :content => "change")
+      response.should have_selector("input", :href => gravatar_url, :value => "change")
     end
   end
 
@@ -285,7 +285,7 @@ describe UsersController do
         # end
         # NOTE KG: only test for the first 3 occurrences
         @users[0..2].each do |user|
-          response.should have_selector("li", :content => user.name)
+          response.should have_selector("a", :content => user.name)
         end
       end
 
