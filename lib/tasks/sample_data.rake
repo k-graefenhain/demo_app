@@ -1,7 +1,7 @@
 namespace :db do
   # moved require into task in order to solve error on heroku
   # see http://stackoverflow.com/questions/5013826/heroku-rake-dbmigrate-no-such-file-to-load-faker
-  require 'faker'
+  #require 'faker'
 
   desc "Fill database with sample data"
   task :populate => :environment do
