@@ -1,0 +1,230 @@
+CHEAT SHEET
+-----------
+
+GIT: 
+git init  # to initialize a new git repository
+git checkout -b static-pages    # create a new branch
+
+---
+
+rails g scaffold User name:string email:string
+
+rake -T db  # list of database tasks
+
+rails console --sandbox     # start the console as a sandbox for testing without making any changes to the database
+
+---
+
+REST: most components are modeled as resources and can be Created, Read, Updated and Deleted
+
+RESTful routes:
+GET /microposts         index   page to list all microposts
+GET /microposts/1       show    page to show micropost with id 1
+GET /microposts/new     new     page to make a new micropost
+POST /microposts        create  create a new micropost
+GET /microposts/1/edit  edit    page to edit micropost with id 1
+PUT /microposts/1       update  update micropost with id 1
+DELETE /microposts/1    destroy delete micropost with id 1
+
+# get REST style URLs to work by adding resources to the routes File
+resources :users
+
+---
+
+VALIDATIONS:
+
+validates :content, :length => { :maximum => 140 }
+
+email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+validates :email, :presence => true,
+          :format => { :with => email_regex },
+          :uniqueness => true           # or: :uniqueness => { :case_sensitive => false }
+
+-
+
+enforce uniqueness at database level:
+rails generate migration add_email_uniqueness_index
+# adding the index is also important to fix an efficiency problem for find_by_email
+
+class AddEmailUniquenessIndex < ActiveRecord::Migration
+  def self.up
+    add_index :users, :email, :unique => true
+  end
+  def self.down
+    remove_index :users, :email
+  end
+end
+---
+
+ATTRIBUTE ACCESSOR
+
+attr_accessor :name, :email     # creates attribute accessors (getter and setter methods for instance variables)
+
+def initialize(attributes = {})     # called when we invoke User.new
+  @name = attributes[:name]
+  @email = attributes[:email]
+end
+
+---
+
+ACCESSIBLE ATTRIBUTES
+
+tell Rails which attributes are accessible, i.e. can be modified by outside users
+attr_accessible :name, :email     # important for preventing mass assignment vulnerability
+
+---
+
+user.new
+user = User.new(:name => "Michael Hartl", :email => "mhartl@example.com")
+user.save
+
+User.create(:name => "A Nother", :email => "another@example.org")     # combine the two steps of making and saving a model
+
+finding users:
+User.find(1)    # find the user with id=1
+User.find_by_email("mhartl@example.com")
+User.first      # returns the first user in the database
+User.all
+
+updating user objects:
+user.email = "mhartl@example.net"
+user.save
+user.update_attributes(:name => "The Dude", :email => "dude@abides.org")      # update and save in 1 step
+# NOTE: only the attributes defined as attribute_accessible can be modified using update_attributes
+
+---
+
+ASSOCIATIONS:
+
+
+class User < ActiveRecord::Base
+  has_many :microposts
+end
+
+class Micropost < ActiveRecord::Base
+  belongs_to :user
+  validates :content, :length => { :maximum => 140 }
+end
+
+---
+
+INSTANCE VARIABLE
+
+@title = "Home"   # automatically available in the corresponding view
+
+---
+
+.html.erb
+
+<%= @title %>
+
+---
+
+RSpec:
+
+rails g rspec:install
+
+response.should be_success
+response.should have_selector("title", :content => "Title")
+
+
+INTEGRATION TESTS:
+
+rails generate integration_test layout_links
+
+---
+
+ROUTES
+
+match '/about', :to => 'pages#about'
+match '/', :to => 'pages#home'
+
+
+NAMED ROUTES:
+
+about_path => '/about'
+about_url => 'http://localhost:3000/about'
+
+e.g. <%= link_to "About", about_path %>
+
+---
+
+ANNOTATE MODELS:
+
+use gem 'annotate-models' in development group
+
+run the command $annotate
+
+
+------------
+
+RUBY BASICS
+
+17 + 42       # Integer addition
+"foo" + "bar" # String concatenation
+"foobar".empty?
+"".empty?
+"foo bar baz".split # Split a string into a three-element array
+"fooxbarxbazx".split('x')
+a = [42, 8, 17]
+a.sort vs. a.sort!
+a.reverse
+a.shuffle
+a << 7      # Pushing 7 onto an array
+a << "foo" << "bar" # Chaining array pushes
+a.join # Join on nothing
+a.join(', ') # Join on comma-space
+
+blocks:
+(1..5).each { |i| puts 2 * i }
+
+(1..5).each do |i|
+  puts 2 * 1
+end
+
+3.times {puts "Hello World!"}
+
+(1..5).map {|i|i**2}
+
+%w[a,b,c]   # %w makes a string array
+
+('a'..'z').to_a.shuffle(0..7).join    # make an alphabet array, shuffle it, pull out the first 8 elements and join them together to make one string
+
+hashes:
+user = {} # {} is an empty hash
+=> {}
+user["first_name"] = "Michael" # Key "first_name", value "Michael"
+=> "Michael"
+user["last_name"] = "Hartl" # Key "last_name", value "Hartl"
+=> "Hartl"
+user["first_name"] # Element access is like arrays
+=> "Michael"
+user # A literal representation of the hash
+
+symbol (as a hash key):
+user = { :name => "Michael Hartl", :email => "michael@example.com" }
+
+user.each do |key, value|
+  puts "Key #{key.inspect} has value #{value.inspect}"
+end
+
+params = {}
+params[:user] = { :name => "Michael Hartl", :email => "mhartl@example.com" }    # nested hash
+params[:user][:email]   # access the user's email address
+
+
+Ruby classes:
+
+s = "foobar" # A literal constructor for strings using double quotes
+s = String.new("foobar") # A named constructor for a string
+a = Array.new([1, 3, 2])
+
+class inheritance:
+class Word < String   # Word inherits from String.
+
+s.class => Word
+s.class.superclass => String
+s.class.superclass.superclass => Object
+s.class.superclass.superclass.superclass => BasicObject
+
+# modify built-in classes, see p. 149
