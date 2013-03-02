@@ -19,7 +19,7 @@ describe "Microposts" do
           fill_in :micropost_content, :with => ""
           click_button
           response.should render_template('pages/home')
-          response.should have_selector("div#error_explanation")
+          response.should have_selector("div>span[class=\"help-inline\"]")
         end.should_not change(Micropost, :count)
       end
     end

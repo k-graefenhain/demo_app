@@ -1,17 +1,17 @@
 <% if signed_in? %>
-  <table class="front" summary="For signed-in users">
+  <table summary="For signed-in users">
     <tbody>
       <tr>
-        <td>
-          <h1 class="micropost">What's up?</h1>
+        <div class="span6">
+          <h2>What's up?</h2>
           <%= render 'shared/micropost_form' %>
-        </td>
-        <td>
+        </div>
+        <div class="sidebar user_info">
           <%= render 'shared/user_info' %>
-        </td>
+        </div>
       </tr>
       <tr>
-        <td class="span12"><%= render 'shared/feed' %></td>
+        <td><%= render 'shared/feed' %></td>
       </tr>
     </tbody>
   </table>
@@ -23,5 +23,5 @@
   sample application.
   </p>
 
-  <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+  <%= link_to "Sign up now!", signup_path, :class => "btn btn-large" %>
 <% end %>

@@ -6,12 +6,15 @@ $iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
 // $navbarBackgroundHighlight: #888;
 // $navbarText: #eee;
 // $navbarLinkColor: #eee;
+// $navbarHeight: 42px;
 
 @import "bootstrap";
 
 @import "bootstrap-responsive";
 
-body { padding-top: 20px; }
+body { 
+  padding-top: 20px;
+}
 
 header {
   padding-top: 20px;
@@ -32,17 +35,19 @@ section h1 {
 }
 
 /* Sign up button */
-a.signup_button {
+.btn-large {
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   display: block;
   text-align: center;
   width: 190px;
-  color: #fff;
-  background: #006400;
+  padding: 20px;
   font-size: 150%;
   font-weight: bold;
-  padding: 20px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
 }
 /* Round corners */
 .round {
@@ -51,12 +56,26 @@ a.signup_button {
   border-radius: 10px;
 }
 
-footer {
-  text-align: center;
+header {
+  text-align: auto;
   margin-top: 50px;
-  width: 710px;
+  width: 100%
+}
+header div.row div div.navbar {
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 0;
+  /* TODO KG: make header navbar smaller */
+  margin-top: auto;
+  margin-bottom: 0;
+  width: 50%;
+}
+
+footer {
+  text-align: right;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: 0;
+  width: 40%;
 }
 
 /* contact page */
@@ -66,6 +85,30 @@ footer {
 a.btn icon-envelope {
   height: 34; 
   width: 34;
+}
+
+form {
+  display: inline;
+  width: 50%;
+}
+td h2 {
+  width: 50%;
+}
+
+div.user_info {
+  margin-top: 30px;
+}
+div.user_info img {
+  padding-right: 0.1em;
+}
+div.user_info a {
+  text-decoration: none;
+}
+div.user_info span.user_name {
+  position: absolute;
+}
+div.user_info span.microposts {
+  font-size: 80%;
 }
 
 table.microposts tbody tr {
